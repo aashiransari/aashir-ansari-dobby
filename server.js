@@ -27,6 +27,18 @@ app.use(moragan('dev'))
 app.use('/api/user', require('./routes/UserRoutes'));
 app.use('/api/image', require('./routes/ImageRoutes'));
 
+// Static File
+if (process.env.NODE_MODE === "production") {
+    app.use(express.static(path.join(__dirname, './client/build')));
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, './client/build/index.html'));
+    })
+} else {
+    app.get('/', (req, res) => {
+        res.send("Api running..")
+    })
+}
+
 //PORT
 const port = process.env.PORT || 8000
 
