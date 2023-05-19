@@ -28,7 +28,7 @@ app.use('/api/user', require('./routes/UserRoutes'));
 app.use('/api/image', require('./routes/ImageRoutes'));
 
 // STATIC FILES
-if (process.env.NODE_MODE === "development") {
+if (process.env.NODE_MODE === "production") {
     app.use(express.static(path.join(__dirname, './client/build')));
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, './client/build/index.html'));
